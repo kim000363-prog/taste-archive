@@ -1,0 +1,43 @@
+/* W05-C 낭독형 — 내가 고치는 파일은 이것 하나.
+   값만 바꾼다. 줄을 지우거나 이름을 바꾸지 않는다. */
+:root {
+  --my-bg: #FFFFFF;        /* 바탕 색 (색 코드) — 기본은 연회색 종이 */
+  --my-point: #00846A;     /* 포인트 색 (색 코드 / none) — 이름·날짜·진행선 */
+  --my-type: serif;        /* serif 명조 · sans 고딕 · mono 고정폭 · hand 손글씨 */
+  --my-motion: 1;          /* 0 조용함 · 1 기본 · 2 강함 */
+  --my-density: 1;         /* 0 비움 · 1 기본 · 2 꽉 */
+  --my-image: native;      /* native 흐린 흑백→가운데 오면 원색 · original 원본 · mono 흑백 · tint 색 덮기 */
+
+  /* 이 시스템 고유 항목 2줄 */
+  --my-reveal: grey;       /* 내 한 문장이 차오르는 방식 grey 회색→먹 · outline 윤곽→먹 → 8주 기록 칸: 움직임 */
+}
+
+/* 커스텀 (학생 요청 2026-10-19) — 히어로 '김동은'이 너무 커서 조금 줄임.
+   이름 크기 상한(--fs-name)을 85%로 낮춘다. 폭에 맞춰 키우는 sig.js fitName()은 이 상한 안에서 맞춘다.
+   .mc-hero 를 앞에 붙여 모바일 미디어쿼리(.mc-hero__name)보다 우선순위를 높여 모든 폭에서 적용. */
+.mc-hero .mc-hero__name { font-size: calc(var(--fs-name) * 0.85); }
+
+/* 커스텀 (학생 요청 2026-10-19) — 히어로 '김동은'을 THEFACESHOP 잉크립퀴드 손글씨 폰트로 */
+@font-face {
+  font-family: 'InkLipquid';
+  /* 김·동·은 글자만 서브셋해 base64로 직접 박음 — 로컬 서버 MIME(application/octet-stream)로는
+     이 브라우저가 폰트를 거부해서. 원본 otf·woff는 fonts/ 에 그대로 둠 */
+  src: url('data:font/woff2;base64,d09GMgABAAAAAAVsAA4AAAAACNQAAAUZAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGyAGYA4IAEQKiTCHBAE2AiQDEAsKAAQgBYMEByAXJBgKG6sGUZQtThPm6wNzDKcF+l6IDpnpJALRRovGsjZW4Ht5G0K2+Ruy3JETuRNBtUb23O4jKvYA6F4ogpAnpV+HFbGKSiyUB9bEx8uxv0S8BE00ptpofWGQTssVunXMYZRf0Oi0qQZ2bzv/az+yxXq/GfD8orUBQwePAmT9v8NpZ7U5G1s5kX/N++9l0Zh2elHYizIey8YcPEWWAWVuLBy5NMIvHLuzpBcIVGrDCmNFx8gK8GX4DwApEWIU4stFdjEAwGrpHdsgEQYAUgkOFhRN2M7aij47qF2Jmo3Csvo/AdJSBOGJ0cYTzl1IOkwBNYhWJDTDEhMR2wBQ3qmzypWFzpvHo/6b1sp+lCYgdxiEJs+k5WpXE4dAXHPdmKREHrDOEmUzM9GxhBLXwUOQAq6QMRgz7Zs3W6rbiaJdDn09EG3Z0Q+RksGrmdWnyRoZJWMVgWY2Ei0hdaZYrTaFOk+7mlCrJNX9GlbRwWo6zIrQAJqU6hWxltFed6zxCn1b7FCPHUNg1EW0apsFWYogsFHOhAMVuQ9ASdZgoqidUa92jGAkgSzuKLSjUKZktl8PxNsZrNWSWE33bbPbcsUPq5nB2jn1VLS8Byo0rGKDnfJBK3rJmkS0TO3gfZLqI0ceLhw16mg0BUhJyRjt6kG2u16JfZ6ltkC0Y8fQFUr73t3M6s0WchWNmX3NtYdFa9ZARaFMBuy3k7evX10IkzI4cfo6WQMPbiVrKl/l0HdMcvErV4IQ8vdZ6bj9/GaiaJ2kGkFUPcJ7NhTS0yRF69cPWLGW5DBtZadbawarVfDIlTgkJ4rwZvz4o//DQITgmivrPCMHSFE3Zl39RSBsXvIqk2Yv/c2fN7VrX5ub7djs8havuZMvTbE7stjWKjpvvFWDgwk3XPjgp2FWCT4+NQMEnQyA/ASpDn7JQkznpNTNFMDdVaDvaQQPK/3Z/DGa9LJ4pCY+4YTGrkPKklDMcZJxJXjG2+Wy0Q9z2KoR+0toKNdEklGS0eSEZjIy6c8y83yfneM3RnIQ0NCMvE6M5+gLhLTnlm+ddwdQ94wf7Vh4/8RMwRC384PZViSJnj0BQ3umG1xIRY5jM7Dtt+2Wn9x0d/vbIzE+Twvk09lTtyBvfY6zj9Tm/4tuXBF2aplUUiS9GMCfhMXj1mz6fz1SOqWQeCLkqfB1K1+KaRw0caGg6bDe3uGWScXviYZk948upQ36rDcir9hJ+zvuCnBwFcU3ZN96E1wOVAa8n3SOfPj256yJRCHmm9ATHX5hGjHGtbO39vfLxcuk2vQajOiER63M9ZYs6fppxGOQM3HeoVtFuIUnoVHio55R6OGoOzqYHkdA6VWkvhOddGhMcBM/j53h4BfEpnzG3UFBi7h0b4L5D85UqzBM4NYFgEAw+3B9ww5Z2FcRgXUH8FRzHgC8v/h/5f+eNZVghQGQFCBIc/8u0vT4H//rjVqAINfkdAeOFGUcCy70FQaADwZy8aYlsodJZdZhiUwAnAGGOfQINxdqnTUnPdpyM8hcYsLRc0q1BgSaAgSKEsyLB0+h2LWyIkEcIo2dFT3a2OlQp3nbW9Jjygw11V6UEStaIKhuoJG0sqBPlx4rliZqB6LNbNQFdS3q1UzV6TNhSCd6M+asV9NiwY2HML6cBENEifdfUWRPiz52ioI21HeDhfASwB/7WV1DGC++XDdbHHGSENnlAliaw//zkR71AOPLP7l3Me//b/8f5qxfieFK/eiS8TYBAAA=') format('woff2');
+  font-weight: normal; font-style: normal; font-display: swap;
+}
+.mc-hero__name, .mc-hero__name .mc-name { font-family: 'InkLipquid', var(--f-text); }
+
+/* 손글씨 써지는 효과 — 왼쪽에서 오른쪽으로 쓰이듯 드러난다.
+   사람 패널이 열릴 때 부모 페이지가 html에 play-write를 붙여 재생한다(다시 열면 다시 쓴다).
+   폰트 로드 뒤 sig.js가 이름 크기를 다시 맞추므로, 패널에 도달할 즈음엔 제 폰트·크기로 쓰인다. */
+.mc-hero__name .mc-name { will-change: clip-path; }
+html.play-write .mc-hero__name .mc-name {
+  animation: mc-write 1.5s cubic-bezier(.65, 0, .35, 1) .2s both;
+}
+@keyframes mc-write {
+  from { clip-path: inset(0 100% 0 0); }
+  to   { clip-path: inset(0 0 0 0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  html.play-write .mc-hero__name .mc-name { animation: none; }
+}

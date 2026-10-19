@@ -1,0 +1,85 @@
+/* 사진 크게 보기 · 마우스 오버 클로즈업 (교수 지시로 추가 · 시스템 파일 밖)
+   시스템 파일(tokens·style·my-style·sig)은 그대로 두고 이 파일만 더한다. */
+.mc-polaroid { cursor: zoom-in; }
+.mc-polaroid:focus-visible { outline: 2px solid var(--point, #00846A); outline-offset: 4px; }
+
+.lb {
+  position: fixed; inset: 0; z-index: 9999;
+  display: none; overflow: hidden;
+  font-family: "Pretendard Variable", Pretendard, -apple-system, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  color: #fff; touch-action: none; user-select: none; -webkit-user-select: none;
+}
+.lb.is-open { display: block; }
+.lb__bg { position: absolute; inset: 0; background: rgba(12, 12, 12, .94); opacity: 0; transition: opacity .35s ease; }
+.lb.is-shown .lb__bg { opacity: 1; }
+
+.lb__track { position: absolute; inset: 0; display: flex; will-change: transform; }
+.lb__track.is-snap { transition: transform .38s cubic-bezier(.2, .7, .2, 1); }
+.lb__slide { flex: 0 0 100%; height: 100%; display: flex; align-items: center; justify-content: center; padding: 64px 24px 88px; box-sizing: border-box; }
+.lb__slide img { max-width: 100%; max-height: 100%; object-fit: contain; display: block; box-shadow: 0 20px 60px rgba(0, 0, 0, .45); transform-origin: center; }
+
+/* 클로즈업: 폴라로이드 자리에서 화면 가운데로 날아온다 */
+.lb__fly { position: fixed; z-index: 10000; object-fit: contain; pointer-events: none; transition: transform .45s cubic-bezier(.2, .7, .2, 1); transform-origin: 0 0; }
+
+.lb__bar { position: absolute; left: 0; right: 0; bottom: 0; padding: 20px 24px calc(20px + env(safe-area-inset-bottom)); display: flex; align-items: baseline; justify-content: space-between; gap: 16px; font-size: 14px; line-height: 1.4; opacity: 0; transition: opacity .3s ease .15s; }
+.lb.is-shown .lb__bar, .lb.is-shown .lb__btn { opacity: 1; }
+.lb__cap b { font-weight: 700; margin-right: 8px; }
+.lb__count { font-variant-numeric: tabular-nums; opacity: .7; white-space: nowrap; }
+
+.lb__btn { position: absolute; background: none; border: 0; color: #fff; cursor: pointer; font: inherit; opacity: 0; transition: opacity .3s ease .15s; padding: 12px; line-height: 1; }
+.lb__btn:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+.lb__close { top: 12px; right: 12px; font-size: 28px; }
+.lb__prev, .lb__next { top: 50%; translate: 0 -50%; font-size: 36px; }
+.lb__prev { left: 8px; }
+.lb__next { right: 8px; }
+.lb__btn[disabled] { opacity: .2 !important; cursor: default; }
+@media (hover: none) { .lb__prev, .lb__next { display: none; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .lb__bg, .lb__bar, .lb__btn, .lb__track.is-snap, .lb__fly { transition: none; }
+}
+
+/* ── 마우스 오버 클로즈업 ─────────────────────────
+   폴라로이드를 집어 드는 느낌: 떠오르며 기울기가 펴지고, 화면 가운데를 넘을 만큼 크게 다가온다.
+   바깥쪽 끝을 축으로 안쪽(가운데)으로 자라서 화면 밖으로 잘리지 않는다.
+   액자 안 사진은 한 단계 더 다가오고, 시선은 lightbox.js가 커서를 따라 부드럽게 옮긴다.
+   크기는 --lift-scale 한 곳에서 정한다. 들어갈 때 .8s, 내려앉을 때 1s. */
+.lb-lens { display: block; overflow: hidden; position: relative; }
+.lb-lens img { transform: translate3d(var(--lx, 0px), var(--ly, 0px), 0) scale(var(--lz, 1)); }
+/* will-change를 두지 않는다 — 두면 작은 크기로 굳힌 그림을 4배로 늘려 흐려진다 */
+
+@media (hover: hover) and (pointer: fine) {
+  .mc-polaroid {
+    --lift-rot: 1.5deg;
+    --lift-scale: 4.2;              /* 11vw 폭 → 약 46vw: 가운데선을 조금 넘는다 */
+    transform-origin: 0% 50%;       /* 왼쪽 사진: 왼쪽 끝을 축으로 오른쪽으로 자란다 */
+    transition: scale 1s cubic-bezier(.22, 1, .36, 1), translate 1s cubic-bezier(.22, 1, .36, 1), rotate 1s cubic-bezier(.22, 1, .36, 1);
+  }
+  .mc-reason:nth-of-type(even) .mc-polaroid { --lift-rot: -1.2deg; transform-origin: 100% 50%; }
+  .mc-polaroid.is-portrait { --lift-scale: 3.4; }   /* 세로 사진은 키가 커서 조금 덜 */
+  .mc-polaroid figcaption { transition: opacity .4s ease; }
+}
+@media (hover: hover) and (pointer: fine) and (max-width: 1080px) {
+  /* 좁은 화면은 사진이 글 아래 가운데에 모두 -1.2deg로 서 있다 → 가운데 축으로 조금만 */
+  .mc-polaroid, .mc-reason:nth-of-type(even) .mc-polaroid { --lift-rot: 1.2deg; --lift-scale: 1.25; transform-origin: 50% 50%; }
+}
+@media (hover: hover) and (pointer: fine) {
+  .mc-polaroid .lb-lens { transition: box-shadow 1s cubic-bezier(.22, 1, .36, 1); }
+  .mc-polaroid:hover, .mc-polaroid:focus-visible {
+    z-index: 50;
+    scale: var(--lift-scale);
+    translate: 0 -10px;
+    rotate: var(--lift-rot);          /* 원래 기울기를 되돌려 똑바로 선다 */
+    transition-duration: .8s;
+  }
+  .mc-polaroid:hover figcaption, .mc-polaroid:focus-visible figcaption { opacity: 0; } /* 캡션이 함께 4배로 커지지 않게 */
+  .mc-polaroid:hover .lb-lens, .mc-polaroid:focus-visible .lb-lens {
+    /* 그림자도 사진과 함께 커지므로 작게 적는다 */
+    box-shadow: 0 5px 12px -4px rgba(0, 0, 0, .32), 0 1px 3px -1px rgba(0, 0, 0, .16);
+    transition-duration: .8s;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .mc-polaroid, .mc-polaroid .lb-lens { transition: none !important; }
+  .mc-polaroid:hover, .mc-polaroid:focus-visible { scale: 1; translate: none; rotate: none; }
+}

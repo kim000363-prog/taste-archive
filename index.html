@@ -1,246 +1,554 @@
-<!doctype html>
-<html lang="ko">
+<!DOCTYPE html>
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>좋아하는 향기, 공간, 그리고 나 — 나의 취향 아카이브</title>
-<meta name="description" content="손으로 무언가를 끝까지 만들어 보는 사람">
-<meta property="og:type" content="website">
-<meta property="og:title" content="좋아하는 향기, 공간, 그리고 나 — 나의 취향 아카이브">
-<meta property="og:description" content="손으로 무언가를 끝까지 만들어 보는 사람">
-<meta property="og:image" content="https://taste-archive-kim.netlify.app/assets/space1_01.jpg">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400&family=Noto+Serif+KR:wght@400;600&family=IBM+Plex+Mono:wght@400;600&family=Nanum+Gothic+Coding:wght@400;700&family=Jua&family=Gowun+Dodum&display=swap">
+<title>sky · hand · road</title>
+
+<!-- 서체는 fonts.css 안에 직접 들어 있다. 바깥 인터넷을 쓰지 않는다 -->
+<link rel="stylesheet" href="fonts.css">
 <link rel="stylesheet" href="tokens.css">
 <link rel="stylesheet" href="style.css">
-<link rel="stylesheet" href="my-style.css">
 </head>
-<body>
+<body data-inverted="true">
 
-<!-- 상단 고정 바 — 왼쪽 사이트 제목 · 오른쪽 장 메뉴 다섯 칸. 첫 화면 사진 위에선 글자색을 사진 명도로(§I-6), 본문 위에선 바탕 면 88% + 흐림(§I-5) -->
-<header class="ca-gnb">
-  <div class="ca-gnb-row">
-    <p class="ca-gnb-name"><a href="#top">좋아하는 향기, 공간, 그리고 나</a></p>
-    <nav class="ca-menu" aria-label="장">
-      <a href="#s2">시선</a>
-      <a href="#s3">사람</a>
-      <a href="#s4">공간</a>
-      <a href="#s5">물건</a>
-      <a href="#s6">기준</a>
-    </nav>
-  </div>
+<!-- 상단 하이라이트 바 — 7주 아카이브 상단 바를 4주 사이트에 얹음(독립 버전). 왼쪽 사이트 이름 · 오른쪽 장 메뉴 다섯 칸.
+     메뉴 링크는 아직 자리표시(#)다 — 아카이브로 이어 붙인 뒤 연결한다 -->
+<header class="hl-bar">
+  <p class="hl-name"><a href="#top">좋아하는 향기, 공간, 그리고 나</a></p>
+  <nav class="hl-menu" aria-label="장">
+    <a href="#" data-go="0">시선</a>
+    <a href="#" data-go="1">사람</a>
+    <a href="#" data-go="2">공간</a>
+  </nav>
 </header>
 
-<!-- ① 첫 화면 — 사진이 여백 없이 화면 가득, 그 위 아래쪽 왼쪽에 대표 제목 -->
-<div class="ca-top ca-top--hero" id="top">
-  <figure class="ca-hero ca-hero--full"><img src="assets/space1_01.jpg" width="4000" height="6000" alt="첫 화면 나무 냄새 나는 목공방 사진 1"></figure>
-  <div class="ca-hero-t">
-    <h1 class="ca-h1">작업하는 하루 곁에 늘 같은 것들을 둔다</h1>
+<nav class="axis" aria-label="Sets">
+  <button type="button" class="axis__item" data-jump="0"  aria-current="true">sky</button>
+  <button type="button" class="axis__item" data-jump="5"  aria-current="false">hand</button>
+  <button type="button" class="axis__item" data-jump="10" aria-current="false">road</button>
+</nav>
+
+<div class="stage" id="stage" data-ready="false">
+
+  <div class="half half--left">
+    <div class="track track--left" id="track-left">
+
+      <!-- sky -->
+      <div class="slide" data-group="sky" data-invert="true">
+        <figure class="frame frame--fill frame--cover frame--anchor-middle">
+          <button type="button" class="frame__btn"><img src="assets/sky06_unknown_unknown.jpg" width="1067" height="1600" alt="sky 01"></button>
+        </figure>
+      </div>
+      <div class="slide" data-group="sky" data-invert="false">
+        <figure class="frame frame--medium frame--center frame--cover frame--anchor-middle">
+          <button type="button" class="frame__btn"><img src="assets/sky01_unknown_unknown.jpg" width="1600" height="1600" alt="sky 03" loading="lazy"></button>
+        </figure>
+      </div>
+      <div class="slide" data-group="sky" data-invert="true">
+        <figure class="frame frame--fill frame--cover frame--anchor-middle">
+          <button type="button" class="frame__btn"><img src="assets/sky04_unknown_unknown.jpg" width="1600" height="1600" alt="sky 05" loading="lazy"></button>
+        </figure>
+      </div>
+      <div class="slide" data-group="sky" data-invert="false">
+        <figure class="frame frame--small frame--center frame--cover frame--anchor-middle">
+          <button type="button" class="frame__btn"><img src="assets/sky03_unknown_unknown.jpg" width="1554" height="1600" alt="sky 07" loading="lazy"></button>
+        </figure>
+      </div>
+      <div class="slide" data-group="sky" data-invert="false">
+        <figure class="frame frame--medium frame--center frame--cover frame--anchor-middle">
+          <button type="button" class="frame__btn"><img src="assets/sky02_unknown_unknown.jpg" width="1600" height="1600" alt="sky 09" loading="lazy"></button>
+        </figure>
+      </div>
+
+      <!-- hand -->
+      <div class="slide" data-group="hand" data-invert="true">
+        <figure class="frame frame--fill frame--cover frame--anchor-middle">
+          <button type="button" class="frame__btn"><img src="assets/hand01_unknown_unknown.jpg" width="1067" height="1600" alt="hand 01" loading="lazy"></button>
+        </figure>
+      </div>
+      <div class="slide" data-group="hand" data-invert="false">
+        <figure class="frame frame--medium frame--center frame--cover frame--anchor-middle">
+          <button type="button" class="frame__btn"><img src="assets/hand03_unknown_unknown.jpg" width="1600" height="1600" alt="hand 03" loading="lazy"></button>
+        </figure>
+      </div>
+      <div class="slide" data-group="hand" data-invert="true">
+        <figure class="frame frame--fill frame--cover frame--anchor-middle">
+          <button type="button" class="frame__btn"><img src="assets/hand05_unknown_unknown.jpg" width="1067" height="1600" alt="hand 05" loading="lazy"></button>
+        </figure>
+      </div>
+      <div class="slide" data-group="hand" data-invert="false">
+        <figure class="frame frame--medium frame--outer frame--cover frame--anchor-top">
+          <button type="button" class="frame__btn"><img src="assets/hand09_unknown_unknown.jpg" width="1467" height="1600" alt="hand 07" loading="lazy"></button>
+        </figure>
+      </div>
+      <div class="slide" data-group="hand" data-invert="false">
+        <figure class="frame frame--small frame--center frame--cover frame--anchor-middle">
+          <button type="button" class="frame__btn"><img src="assets/hand10_unknown_unknown.jpg" width="1600" height="1600" alt="hand 09" loading="lazy"></button>
+        </figure>
+      </div>
+
+      <!-- road -->
+      <div class="slide" data-group="road" data-invert="true">
+        <figure class="frame frame--fill frame--cover frame--anchor-middle">
+          <button type="button" class="frame__btn"><img src="assets/road09_unknown_unknown.jpg" width="1600" height="1067" alt="road 01" loading="lazy"></button>
+        </figure>
+      </div>
+      <div class="slide" data-group="road" data-invert="false">
+        <figure class="frame frame--medium frame--center frame--cover frame--anchor-middle">
+          <button type="button" class="frame__btn"><img src="assets/road02_unknown_unknown.jpg" width="1600" height="1600" alt="road 03" loading="lazy"></button>
+        </figure>
+      </div>
+      <div class="slide" data-group="road" data-invert="true">
+        <figure class="frame frame--fill frame--cover frame--anchor-middle">
+          <button type="button" class="frame__btn"><img src="assets/road04_unknown_unknown.jpg" width="1600" height="1600" alt="road 05" loading="lazy"></button>
+        </figure>
+      </div>
+      <div class="slide" data-group="road" data-invert="false">
+        <figure class="frame frame--small frame--center frame--cover frame--anchor-middle">
+          <button type="button" class="frame__btn"><img src="assets/road03_unknown_unknown.jpg" width="1594" height="1600" alt="road 07" loading="lazy"></button>
+        </figure>
+      </div>
+      <div class="slide" data-group="road" data-invert="false">
+        <figure class="frame frame--medium frame--center frame--cover frame--anchor-middle">
+          <button type="button" class="frame__btn"><img src="assets/road05_unknown_unknown.jpg" width="1580" height="1600" alt="road 09" loading="lazy"></button>
+        </figure>
+      </div>
+
+    </div>
   </div>
+
+  <div class="half half--right">
+    <div class="track track--right" id="track-right">
+
+      <!-- sky -->
+      <div class="slide" data-group="sky">
+        <figure class="frame frame--fill frame--cover frame--anchor-middle">
+          <button type="button" class="frame__btn"><img src="assets/sky08_unknown_unknown.jpg" width="1067" height="1600" alt="sky 02"></button>
+        </figure>
+      </div>
+      <div class="slide" data-group="sky">
+        <figure class="frame frame--fit frame--inner">
+          <button type="button" class="frame__btn"><img src="assets/sky07_unknown_unknown.jpg" width="1067" height="1600" alt="sky 04" loading="lazy"></button>
+        </figure>
+      </div>
+      <div class="slide" data-group="sky">
+        <figure class="frame frame--fill frame--cover frame--anchor-middle">
+          <button type="button" class="frame__btn"><img src="assets/sky09_unknown_unknown.jpg" width="1078" height="1600" alt="sky 06" loading="lazy"></button>
+        </figure>
+      </div>
+      <div class="slide" data-group="sky">
+        <figure class="frame frame--fit frame--inner">
+          <button type="button" class="frame__btn"><img src="assets/sky10_unknown_unknown.jpg" width="1208" height="1600" alt="sky 08" loading="lazy"></button>
+        </figure>
+      </div>
+      <div class="slide" data-group="sky">
+        <figure class="frame frame--fit frame--inner">
+          <button type="button" class="frame__btn"><img src="assets/sky05_unknown_unknown.jpg" width="1600" height="1464" alt="sky 10" loading="lazy"></button>
+        </figure>
+      </div>
+
+      <!-- hand -->
+      <div class="slide" data-group="hand">
+        <figure class="frame frame--fill frame--cover frame--anchor-middle">
+          <button type="button" class="frame__btn"><img src="assets/hand04_unknown_unknown.jpg" width="1067" height="1600" alt="hand 02" loading="lazy"></button>
+        </figure>
+      </div>
+      <div class="slide" data-group="hand">
+        <figure class="frame frame--fit frame--inner">
+          <button type="button" class="frame__btn"><img src="assets/hand07_unknown_unknown.jpg" width="900" height="1600" alt="hand 04" loading="lazy"></button>
+        </figure>
+      </div>
+      <div class="slide" data-group="hand">
+        <figure class="frame frame--fill frame--cover frame--anchor-middle">
+          <button type="button" class="frame__btn"><img src="assets/hand06_unknown_unknown.jpg" width="1067" height="1600" alt="hand 06" loading="lazy"></button>
+        </figure>
+      </div>
+      <div class="slide" data-group="hand">
+        <figure class="frame frame--fit frame--inner">
+          <button type="button" class="frame__btn"><img src="assets/hand02_unknown_unknown.jpg" width="1068" height="1600" alt="hand 08" loading="lazy"></button>
+        </figure>
+      </div>
+      <div class="slide" data-group="hand">
+        <figure class="frame frame--fit frame--inner">
+          <button type="button" class="frame__btn"><img src="assets/hand08_unknown_unknown.jpg" width="1435" height="1600" alt="hand 10" loading="lazy"></button>
+        </figure>
+      </div>
+
+      <!-- road -->
+      <div class="slide" data-group="road">
+        <figure class="frame frame--fill frame--cover frame--anchor-middle">
+          <button type="button" class="frame__btn"><img src="assets/road01_unknown_unknown.jpg" width="1092" height="1600" alt="road 02" loading="lazy"></button>
+        </figure>
+      </div>
+      <div class="slide" data-group="road">
+        <figure class="frame frame--fit frame--inner">
+          <button type="button" class="frame__btn"><img src="assets/road06_unknown_unknown.jpg" width="1067" height="1600" alt="road 04" loading="lazy"></button>
+        </figure>
+      </div>
+      <div class="slide" data-group="road">
+        <figure class="frame frame--fill frame--cover frame--anchor-middle">
+          <button type="button" class="frame__btn"><img src="assets/road10_unknown_unknown.jpg" width="903" height="1600" alt="road 06" loading="lazy"></button>
+        </figure>
+      </div>
+      <div class="slide" data-group="road">
+        <figure class="frame frame--fit frame--inner">
+          <button type="button" class="frame__btn"><img src="assets/road07_unknown_unknown.jpg" width="1067" height="1600" alt="road 08" loading="lazy"></button>
+        </figure>
+      </div>
+      <div class="slide" data-group="road">
+        <figure class="frame frame--fit frame--inner">
+          <button type="button" class="frame__btn"><img src="assets/road08_unknown_unknown.jpg" width="1280" height="1600" alt="road 10" loading="lazy"></button>
+        </figure>
+      </div>
+
+    </div>
+  </div>
+
 </div>
 
-<main>
+<!-- 사람(2장) 패널 — 5주 웹 페이지를 통째로 전체화면으로. 시선(4주) 마지막 슬라이드에서 한 번 더 아래로 굴리면 올라오고,
+     이 페이지 맨 위에서 위로 굴리면 다시 시선으로 돌아간다. 전환 로직은 아래 스크립트 -->
+<section class="person" id="person" aria-label="2장 사람">
+  <iframe class="person__frame" id="person-frame" title="2장 사람 — 5주 웹 페이지" src="person/index.html"></iframe>
+</section>
 
-  <!-- ③ 1장 시선 — 묶음마다 카드 하나(사진 최대 5장). 4주 묶음 기획 의도가 한 문장뿐이라 .ca-why 하나로 둔다(카드 서브카피 · 상세 모두 이 문장) -->
-  <section class="ca-sec" id="s2" aria-labelledby="s2-t">
-    <div class="ca-head ca-row"><h2 class="ca-label" id="s2-t">1장 시선</h2>
-      <p class="ca-lead">몽환, 사랑, 지나치기 쉬운 것들</p>
-    </div>
-    <div class="ca-track">
-      <article class="ca-card">
-        <div class="ca-cap"><h3 class="ca-name"><button class="ca-open" type="button">하늘</button></h3>
-        </div>
-        <div class="ca-body">
-          <figure class="ca-fig"><img src="assets/w04_sky01_unknown_unknown.jpg" width="1600" height="1600" alt="1장 시선 하늘 사진 1"></figure>
-          <figure class="ca-fig"><img src="assets/w04_sky02_unknown_unknown.jpg" width="1600" height="1600" alt="1장 시선 하늘 사진 2"></figure>
-          <figure class="ca-fig"><img src="assets/w04_sky03_unknown_unknown.jpg" width="1554" height="1600" alt="1장 시선 하늘 사진 3"></figure>
-          <figure class="ca-fig"><img src="assets/w04_sky04_unknown_unknown.jpg" width="1600" height="1600" alt="1장 시선 하늘 사진 4"></figure>
-          <figure class="ca-fig"><img src="assets/w04_sky05_unknown_unknown.jpg" width="1600" height="1464" alt="1장 시선 하늘 사진 5"></figure>
-          <p class="ca-why">저녁 하늘의 풍경들을 보여주고 싶었다</p>
-        </div>
-      </article>
-      <article class="ca-card">
-        <div class="ca-cap"><h3 class="ca-name"><button class="ca-open" type="button">손</button></h3>
-        </div>
-        <div class="ca-body">
-          <figure class="ca-fig"><img src="assets/w04_hand01_unknown_unknown.jpg" width="1067" height="1600" alt="1장 시선 손 사진 1"></figure>
-          <figure class="ca-fig"><img src="assets/w04_hand02_unknown_unknown.jpg" width="1068" height="1600" alt="1장 시선 손 사진 2"></figure>
-          <figure class="ca-fig"><img src="assets/w04_hand03_unknown_unknown.jpg" width="1600" height="1600" alt="1장 시선 손 사진 3"></figure>
-          <figure class="ca-fig"><img src="assets/w04_hand04_unknown_unknown.jpg" width="1067" height="1600" alt="1장 시선 손 사진 4"></figure>
-          <figure class="ca-fig"><img src="assets/w04_hand05_unknown_unknown.jpg" width="1067" height="1600" alt="1장 시선 손 사진 5"></figure>
-          <p class="ca-why">가장 특별한 결혼이라는 상황을 표현할 수 있는 사진</p>
-        </div>
-      </article>
-      <article class="ca-card">
-        <div class="ca-cap"><h3 class="ca-name"><button class="ca-open" type="button">길</button></h3>
-        </div>
-        <div class="ca-body">
-          <figure class="ca-fig"><img src="assets/w04_road01_unknown_unknown.jpg" width="1092" height="1600" alt="1장 시선 길 사진 1"></figure>
-          <figure class="ca-fig"><img src="assets/w04_road02_unknown_unknown.jpg" width="1600" height="1600" alt="1장 시선 길 사진 2"></figure>
-          <figure class="ca-fig"><img src="assets/w04_road03_unknown_unknown.jpg" width="1594" height="1600" alt="1장 시선 길 사진 3"></figure>
-          <figure class="ca-fig"><img src="assets/w04_road04_unknown_unknown.jpg" width="1600" height="1600" alt="1장 시선 길 사진 4"></figure>
-          <figure class="ca-fig"><img src="assets/w04_road05_unknown_unknown.jpg" width="1580" height="1600" alt="1장 시선 길 사진 5"></figure>
-          <p class="ca-why">평소에 길을 가다가 볼 수 있지만 쉽게 놓치는 road sign들</p>
-        </div>
-      </article>
-    </div>
-  </section>
+<!-- 공간(3장) 패널 — 입체 좌우 스크롤(coverflow). 사람 맨 아래에서 한 번 더 아래로 굴리면 올라오고,
+     공간 맨 왼쪽에서 위로 굴리면 다시 사람으로. 전환 로직은 아래 스크립트 -->
+<section class="space" id="space" aria-label="3장 공간">
+  <iframe class="space__frame" id="space-frame" title="3장 공간 — 입체 좌우 스크롤" src="proto_space.html"></iframe>
+</section>
 
-  <!-- ④ 2장 사람 — 왼쪽 4단 = 장 이름 · 큰 문장 | 오른쪽 = 이유 카드 셋 -->
-  <section class="ca-sec ca-split" id="s3" aria-labelledby="s3-t">
-    <div class="ca-head ca-row"><h2 class="ca-label" id="s3-t">2장 사람</h2>
-      <p class="ca-lead">나를 이해해 주고, 나를 움직이게 하는 사람</p>
-    </div>
-    <div class="ca-grid ca-row">
-      <article class="ca-card">
-        <div class="ca-cap"><h3 class="ca-name"><button class="ca-open" type="button">프로페셔널</button></h3>
-          <p class="ca-when">와이프가 현직 디자이너로서 본인의 자리에서 열심히 하는 모습</p>
-        </div>
-        <div class="ca-body">
-          <figure class="ca-fig"><img src="assets/w05_kakaotalk_20260929_103738686_18.jpg" width="2800" height="1576" alt="2장 사람 프로페셔널 사진 1"></figure>
-          <p class="ca-why">그 모습을 보면 나도 자극을 받아 열심히 하게 된다</p>
-        </div>
-      </article>
-      <article class="ca-card">
-        <div class="ca-cap"><h3 class="ca-name"><button class="ca-open" type="button">귀엽다</button></h3>
-          <p class="ca-when">볼따구가 상당히 말랑말랑하다</p>
-        </div>
-        <div class="ca-body">
-          <figure class="ca-fig"><img src="assets/w05_kakaotalk_20260929_104147875_10.jpg" width="3840" height="2160" alt="2장 사람 귀엽다 사진 1"></figure>
-          <p class="ca-why">다람쥐 같다</p>
-        </div>
-      </article>
-      <article class="ca-card">
-        <div class="ca-cap"><h3 class="ca-name"><button class="ca-open" type="button">나의 이해자</button></h3>
-          <p class="ca-when">내 취미에 동참해준다</p>
-        </div>
-        <div class="ca-body">
-          <figure class="ca-fig"><img src="assets/w05_kakaotalk_20260929_104147875_21.png" width="1182" height="934" alt="2장 사람 나의 이해자 사진 1"></figure>
-          <p class="ca-why">나의 취미, 생각, 성격 등을 이해해주고 배려해주는 것이 너무 고맙다</p>
-        </div>
-      </article>
-    </div>
-  </section>
+<div class="viewer" id="viewer" role="dialog" aria-modal="true" aria-label="Large view" data-open="false">
+  <div class="viewer__stage">
+    <img class="viewer__img" id="viewer-img" src="" alt="">
+    <button type="button" class="viewer__nav viewer__nav--prev" id="viewer-prev"><span class="visually-hidden">previous</span></button>
+    <button type="button" class="viewer__nav viewer__nav--next" id="viewer-next"><span class="visually-hidden">next</span></button>
+    <button type="button" class="viewer__close" id="viewer-close"><span class="visually-hidden">close</span></button>
+  </div>
+  <p class="viewer__caption" id="viewer-caption"></p>
+  <div class="viewer__strip" id="viewer-strip"></div>
+</div>
 
-  <!-- ⑤ 3장 공간 — 왼쪽 공간 목록(이름 · 서브카피 · More) | 오른쪽 사진을 작은 정사각 칸에 흩어 둠. 칸 클릭 → 상세 -->
-  <section class="ca-sec" id="s4" aria-labelledby="s4-t">
-    <div class="ca-head ca-row"><h2 class="ca-label" id="s4-t">3장 공간</h2>
-    </div>
-    <div class="ca-track" data-scatter>
-      <article class="ca-card">
-        <div class="ca-cap"><h3 class="ca-name"><button class="ca-open" type="button">나무 냄새 나는 목공방</button></h3>
-          <p class="ca-when">나무를 깎아 작은 물건을 만든다</p>
-        </div>
-        <div class="ca-body">
-          <figure class="ca-fig"><img src="assets/space1_01.jpg" width="4000" height="6000" alt="3장 공간 나무 냄새 나는 목공방 사진 1"></figure>
-          <figure class="ca-fig"><img src="assets/space1_02.jpg" width="736" height="1097" alt="3장 공간 나무 냄새 나는 목공방 사진 2"></figure>
-          <figure class="ca-fig"><img src="assets/space1_03.jpg" width="3456" height="5184" alt="3장 공간 나무 냄새 나는 목공방 사진 3"></figure>
-          <p class="ca-why">깎던 물건이 거의 다 모양을 갖췄을 때
-완성되어 가는 게 눈에 보이는 뿌듯함을 느끼고 싶어서</p>
-        </div>
-      </article>
-      <article class="ca-card">
-        <div class="ca-cap"><h3 class="ca-name"><button class="ca-open" type="button">가죽 냄새 나는 공방</button></h3>
-          <p class="ca-when">가죽을 재단하고 가방을 만든다</p>
-        </div>
-        <div class="ca-body">
-          <figure class="ca-fig"><img src="assets/space2_01.jpg" width="408" height="728" alt="3장 공간 가죽 냄새 나는 공방 사진 1"></figure>
-          <p class="ca-why">마지막 바느질 한 땀을 남겨 두었을 때
-끝내기 직전의 설렘을 조금 더 붙잡고 싶어서</p>
-        </div>
-      </article>
-      <article class="ca-card">
-        <div class="ca-cap"><h3 class="ca-name"><button class="ca-open" type="button">햇빛이 드는 공간</button></h3>
-          <p class="ca-when">아무것도 만들지 않고 잠깐 쉰다</p>
-        </div>
-        <div class="ca-body">
-          <figure class="ca-fig"><img src="assets/space3_01.jpg" width="735" height="905" alt="3장 공간 햇빛이 드는 공간 사진 1"></figure>
-          <figure class="ca-fig"><img src="assets/space3_02.jpg" width="666" height="1000" alt="3장 공간 햇빛이 드는 공간 사진 2"></figure>
-          <figure class="ca-fig"><img src="assets/space3_03.jpg" width="4160" height="6240" alt="3장 공간 햇빛이 드는 공간 사진 3"></figure>
-          <p class="ca-why">다음 작업을 시작하기 전, 머리를 비우고 싶을 때
-햇빛을 받으며 일상의 피로를 풀고 싶어서</p>
-        </div>
-      </article>
-    </div>
-  </section>
+<script>
+(function () {
+  "use strict";
 
-  <!-- ⑥ 4장 물건 — 카드 다섯, 타이틀 앞 [01]은 시스템이 붙인다. 사진 한마디(figcaption)는 상세에서만 보인다 -->
-  <section class="ca-sec" id="s5" aria-labelledby="s5-t">
-    <div class="ca-head ca-row"><h2 class="ca-label" id="s5-t">4장 물건</h2>
-    </div>
-    <div class="ca-track" data-index>
-      <article class="ca-card">
-        <div class="ca-cap"><h3 class="ca-name"><button class="ca-open" type="button">하루를 여는 화면</button></h3>
-          <p class="ca-when">매일, 매 순간</p>
-        </div>
-        <div class="ca-body">
-          <figure class="ca-fig"><img src="assets/obj1_01.jpg" width="547" height="365" alt="4장 물건 하루를 여는 화면 사진 1"><figcaption>연보라 뒷면, 세 개의 눈</figcaption></figure>
-          <figure class="ca-fig"><img src="assets/obj1_02.jpg" width="594" height="1176" alt="4장 물건 하루를 여는 화면 사진 2"><figcaption>손에 쥐는 옆선</figcaption></figure>
-          <p class="ca-why">하루의 시작과 끝을 이걸로 열고 닫아서</p>
-        </div>
-      </article>
-      <article class="ca-card">
-        <div class="ca-cap"><h3 class="ca-name"><button class="ca-open" type="button">귀에 넣는 하얀 조약돌</button></h3>
-          <p class="ca-when">작업에 집중할 때 바깥 소리를 닫는다</p>
-        </div>
-        <div class="ca-body">
-          <figure class="ca-fig"><img src="assets/obj2_01.png" width="600" height="600" alt="4장 물건 귀에 넣는 하얀 조약돌 사진 1"><figcaption>뚜껑을 연 순간</figcaption></figure>
-          <figure class="ca-fig"><img src="assets/obj2_02.jpg" width="750" height="750" alt="4장 물건 귀에 넣는 하얀 조약돌 사진 2"><figcaption>귀에 들어가기 직전</figcaption></figure>
-          <p class="ca-why">귀에 넣는 순간 어디든 나만의 공간이 되어서</p>
-        </div>
-      </article>
-      <article class="ca-card">
-        <div class="ca-cap"><h3 class="ca-name"><button class="ca-open" type="button">작업을 움직이는 손잡이</button></h3>
-          <p class="ca-when">작업이 끝날 때까지 손에서 놓지 않는다</p>
-        </div>
-        <div class="ca-body">
-          <figure class="ca-fig"><img src="assets/obj3_01.jpg" width="640" height="640" alt="4장 물건 작업을 움직이는 손잡이 사진 1"><figcaption>비스듬히 본 곡선</figcaption></figure>
-          <figure class="ca-fig"><img src="assets/obj3_02.webp" width="2500" height="2160" alt="4장 물건 작업을 움직이는 손잡이 사진 2"><figcaption>초록 불이 켜진 순간</figcaption></figure>
-          <p class="ca-why">끝까지 해내는 동안 작업을 이걸로 움직여서</p>
-        </div>
-      </article>
-      <article class="ca-card">
-        <div class="ca-cap"><h3 class="ca-name"><button class="ca-open" type="button">세상을 또렷하게 하는 테</button></h3>
-          <p class="ca-when">눈을 뜨면 가장 먼저 찾아 쓴다</p>
-        </div>
-        <div class="ca-body">
-          <figure class="ca-fig"><img src="assets/obj4_01.png" width="1000" height="1000" alt="4장 물건 세상을 또렷하게 하는 테 사진 1"><figcaption>금빛 다리, 검은 테</figcaption></figure>
-          <figure class="ca-fig"><img src="assets/obj4_02.jpg" width="860" height="860" alt="4장 물건 세상을 또렷하게 하는 테 사진 2"><figcaption>같은 모양, 다른 세 색</figcaption></figure>
-          <p class="ca-why">이걸 써야 세상이 제대로 보여서</p>
-        </div>
-      </article>
-      <article class="ca-card">
-        <div class="ca-cap"><h3 class="ca-name"><button class="ca-open" type="button">하루치 물을 담는 통</button></h3>
-          <p class="ca-when">작업하는 동안 책상 한쪽에 세워 둔다</p>
-        </div>
-        <div class="ca-body">
-          <figure class="ca-fig"><img src="assets/obj5_01.png" width="1000" height="1000" alt="4장 물건 하루치 물을 담는 통 사진 1"><figcaption>가득 채운 아침</figcaption></figure>
-          <figure class="ca-fig"><img src="assets/obj5_02.jpg" width="800" height="500" alt="4장 물건 하루치 물을 담는 통 사진 2"><figcaption>나란히 선 세 개의 통</figcaption></figure>
-          <p class="ca-why">한 번 채우면 작업이 끝날 때까지 다시 일어나지 않아도 돼서</p>
-        </div>
-      </article>
-    </div>
-  </section>
+  var stage  = document.getElementById("stage");
+  var left   = document.getElementById("track-left");
+  var right  = document.getElementById("track-right");
+  var axis   = [].slice.call(document.querySelectorAll(".axis__item"));
+  var lSlides = [].slice.call(left.children);
+  var rSlides = [].slice.call(right.children);
+  var n = lSlides.length;
 
-  <!-- ⑦ 기준이 쌓이는 자리 — 장 키워드별 기준 한 줄. 6주(공간) 기준 한 줄은 미정이라 줄째 비움. 7주(물건)는 회고 뒤 채움 -->
-  <section class="ca-sec" id="s6" aria-labelledby="s6-t">
-    <div class="ca-head ca-row"><h2 class="ca-label" id="s6-t">기준이 쌓이는 자리</h2></div>
-    <dl class="ca-rows">
-      <div class="ca-r ca-row"><dt>시선</dt><dd>흔한 장면 안에서 특별한 순간을 고른다</dd></div>
-      <div class="ca-r ca-row"><dt>사람</dt><dd>나를 움직이게 하는 사람을 곁에 둔다</dd></div>
-      <!-- 7주 기준 줄: 회고 뒤 <div class="ca-r ca-row"><dt>물건</dt><dd>…</dd></div> 로 되살림 -->
-      <div class="ca-r ca-row"><dt>불호</dt><dd>나만의 공간이 아닌 곳<br>색과 무늬가 요란한 물건</dd></div>
-    </dl>
-  </section>
-</main>
+  var viewer  = document.getElementById("viewer");
+  var vImg    = document.getElementById("viewer-img");
+  var vCap    = document.getElementById("viewer-caption");
+  var vStrip  = document.getElementById("viewer-strip");
+  var btnPrev = document.getElementById("viewer-prev");
+  var btnNext = document.getElementById("viewer-next");
+  var btnClose= document.getElementById("viewer-close");
 
-<!-- 하단 고정 바 — Email · Instagram 칸은 주제카드/07주.md 칸 배정표대로 기본 삭제(공개 주소라 연락처를 싣지 않음). ©연도만 -->
-<footer class="ca-bar-b">
-  <p class="ca-gnb-c" lang="en">©2026</p>
-</footer>
+  /* ---------- 분할 이동 — 왼쪽은 위로, 오른쪽은 아래로 ----------
+     휠 입력을 target 에 쌓고, pos 가 매 프레임 따라간다. 입력이 멈추면 한 쌍에 스냅한다.
+     한 번에 한 칸씩 잠그는 방식보다 마우스로 훑을 때 걸리는 느낌이 없다 */
 
-<script src="sig.js"></script>
+  var WHEEL_STEP = 700;   // 휠 델타 얼마를 한 화면으로 볼지
+  var FOLLOW     = 0.16;  // pos 가 target 을 따라가는 비율 (한 칸이 약 .5s — --dur-image 와 맞춤)
+  var SNAP_WAIT  = 130;   // 입력이 멈춘 뒤 스냅까지 (ms)
+  var SNAP_MIN   = 0.12;  // 이만큼만 밀어도 한 화면 넘긴다 (휠 한 칸 = 약 0.17)
+
+  var target = 0;         // 가고 싶은 위치 (실수)
+  var pos    = 0;         // 지금 위치 (실수)
+  var shown  = -1;        // 마지막으로 반영한 정수 화면
+  var anchor = 0;         // 이번 휠 동작을 시작한 화면
+  var moving = false;     // 휠 동작 중인지
+  var snapTimer = null;
+
+  function apply() {
+    left.style.transform  = "translate3d(0, " + (-pos * 100) + "vh, 0)";
+    right.style.transform = "translate3d(0, " + (-(n - 1 - pos) * 100) + "vh, 0)";
+
+    var i = Math.round(pos);
+    if (i === shown) return;
+    shown = i;
+
+    document.body.dataset.inverted = lSlides[i].dataset.invert;
+
+    var group = lSlides[i].dataset.group;
+    axis.forEach(function (b) {
+      b.setAttribute("aria-current", lSlides[Number(b.dataset.jump)].dataset.group === group ? "true" : "false");
+    });
+
+    [i - 1, i + 1].forEach(function (k) {            // 다음·이전 화면 사진을 미리 불러 둔다
+      if (k < 0 || k >= n) return;
+      [lSlides[k], rSlides[k]].forEach(function (s) {
+        var img = s.querySelector("img");
+        if (img) img.loading = "eager";
+      });
+    });
+
+    cursor();
+  }
+
+  var raf = null;
+
+  function settle() { pos = target; apply(); }
+
+  function loop() {
+    var d = target - pos;
+    if (Math.abs(d) < 0.0008) { settle(); raf = null; return; }
+    pos += d * FOLLOW;
+    apply();
+    raf = requestAnimationFrame(loop);
+  }
+
+  // 탭이 뒤에 있으면 rAF 가 돌지 않는다. 그때는 애니메이션 없이 바로 맞춘다
+  function run() {
+    if (document.hidden) { settle(); return; }
+    if (raf === null) raf = requestAnimationFrame(loop);
+  }
+
+  document.addEventListener("visibilitychange", function () {
+    if (raf !== null) { cancelAnimationFrame(raf); raf = null; }
+    run();
+  });
+
+  function clamp(v) { return Math.max(0, Math.min(n - 1, v)); }
+
+  function nudge(delta) {
+    if (!moving) { anchor = Math.round(pos); moving = true; }
+    target = clamp(target + delta);
+    clearTimeout(snapTimer);
+    snapTimer = setTimeout(snap, SNAP_WAIT);
+    run();
+  }
+
+  // 밀어 둔 만큼을 화면 단위로 끊는다. 살짝만 밀어도(SNAP_MIN) 한 칸은 넘어간다
+  function snap() {
+    var d = target - anchor;
+    var step = 0;
+    if (Math.abs(d) >= SNAP_MIN) {
+      step = Math.max(1, Math.round(Math.abs(d))) * (d > 0 ? 1 : -1);
+    }
+    target = clamp(anchor + step);
+    moving = false;
+    run();
+  }
+
+  function go(next) {                                 // 정해진 화면으로 (축 라벨·키보드)
+    clearTimeout(snapTimer);
+    moving = false;
+    target = clamp(Math.round(next));
+    run();
+  }
+
+  /* ---------- 패널 전환: 시선(0) ↔ 사람(1) ↔ 공간(2) ----------
+     시선 마지막 슬라이드에서 한 번 더 아래 → 사람. 사람 맨 위에서 위 → 시선.
+     사람 맨 아래에서 한 번 더 아래 → 공간. 공간 맨 왼쪽에서 위 → 사람.
+     상단 메뉴(시선·사람·공간) 클릭으로도 바로 이동. */
+  var person = document.getElementById("person");
+  var pframe = document.getElementById("person-frame");
+  var space  = document.getElementById("space");
+  var sframe = document.getElementById("space-frame");
+  var panel  = 0;          // 0 시선 · 1 사람 · 2 공간
+  var ovUp = 0, ovDn = 0;  // 경계에서 더 굴린 양
+  var PANEL_TRIG = 120;    // 이만큼 더 굴리면 넘어간다 ("한 번 더")
+
+  // 사람 히어로 '김동은' 손글씨 쓰이는 효과 재생/정리
+  function playWrite(on) {
+    try {
+      var html = pframe.contentDocument && pframe.contentDocument.documentElement;
+      if (!html) return;
+      html.classList.remove("play-write");
+      if (on) { void html.offsetWidth; html.classList.add("play-write"); }
+    } catch (e) {}
+  }
+  // 공간에 들어올 때 맨 왼쪽(첫 칸)에서 시작
+  function resetSpace() {
+    try { var sc = sframe.contentDocument.getElementById("s3"); if (sc) sc.scrollLeft = 0; } catch (e) {}
+  }
+
+  function setPanel(nn) {
+    if (nn === panel) return;
+    panel = nn; ovUp = 0; ovDn = 0;
+    person.classList.toggle("is-on", nn >= 1);
+    space.classList.toggle("is-on", nn >= 2);
+    playWrite(nn === 1);
+    if (nn === 2) resetSpace();
+  }
+
+  // 사람 페이지(iframe) 스크롤 경계: 맨 위에서 위 → 시선 · 맨 아래에서 아래 → 공간
+  pframe.addEventListener("load", function () {
+    try {
+      var pwin = pframe.contentWindow, pdoc = pframe.contentDocument;
+      pwin.addEventListener("wheel", function (e) {
+        if (panel !== 1) return;
+        var el = pdoc.scrollingElement || pdoc.documentElement;
+        var top = el.scrollTop;
+        var bottom = top + el.clientHeight >= el.scrollHeight - 2;
+        if (e.deltaY < 0 && top <= 0) { ovUp += -e.deltaY; ovDn = 0; if (ovUp > PANEL_TRIG) setPanel(0); }
+        else if (e.deltaY > 0 && bottom) { ovDn += e.deltaY; ovUp = 0; if (ovDn > PANEL_TRIG) setPanel(2); }
+        else { ovUp = 0; ovDn = 0; }
+      }, { passive: true });
+    } catch (err) {}
+  });
+
+  // 공간 페이지(iframe) 맨 왼쪽에서 위로 굴리면 사람으로
+  sframe.addEventListener("load", function () {
+    try {
+      var swin = sframe.contentWindow, sdoc = sframe.contentDocument;
+      var sc = sdoc.getElementById("s3");
+      swin.addEventListener("wheel", function (e) {
+        if (panel !== 2) return;
+        var unit = e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? window.innerHeight : 1;
+        var dy = e.deltaY * unit;
+        if (dy < 0 && sc && sc.scrollLeft <= 0) { ovUp += -dy; if (ovUp > PANEL_TRIG) setPanel(1); }
+        else ovUp = 0;
+      }, { passive: true, capture: true });
+    } catch (err) {}
+  });
+
+  // 시선(0)에서만 분할 무대가 휠을 받는다. 마지막 슬라이드에서 한 번 더 아래 → 사람
+  window.addEventListener("wheel", function (e) {
+    if (viewer.dataset.open === "true") return;
+    if (panel !== 0) return;            // 사람·공간에선 각 iframe 이 휠을 처리
+    e.preventDefault();
+    if (e.deltaY > 0 && Math.round(pos) >= n - 1 && Math.abs(target - (n - 1)) < 0.02) {
+      ovDn += e.deltaY;
+      if (ovDn > PANEL_TRIG) setPanel(1);
+      return;
+    }
+    ovDn = 0;
+    nudge(e.deltaY / WHEEL_STEP);
+  }, { passive: false });
+
+  // 상단 메뉴(시선·사람·공간) 클릭 → 해당 패널로
+  [].slice.call(document.querySelectorAll(".hl-menu a[data-go]")).forEach(function (a) {
+    a.addEventListener("click", function (e) { e.preventDefault(); setPanel(Number(a.dataset.go)); });
+  });
+
+  axis.forEach(function (b) {
+    b.addEventListener("click", function () { go(Number(b.dataset.jump)); });
+  });
+
+  /* ---------- 커서 — 지금 갈 수 있는 방향을 알린다 (원본 규칙) ---------- */
+  var mouseY = null;
+
+  function cursor() {
+    var i = Math.round(pos);
+    var canUp = i > 0;
+    var canDown = i < n - 1;
+    var state = "updown";
+
+    if (!canUp)        state = "down";
+    else if (!canDown) state = "up";
+    else if (mouseY !== null) {
+      // 화면 위쪽에 있으면 위로, 아래쪽에 있으면 아래로
+      state = mouseY < window.innerHeight / 2 ? "up" : "down";
+    }
+    stage.dataset.cursor = state;
+  }
+
+  window.addEventListener("mousemove", function (e) {
+    mouseY = e.clientY;
+    cursor();
+  }, { passive: true });
+
+  /* ---------- 크게 보기 ---------- */
+  // 화면에 나온 순서대로 묶음별 목록을 만든다 (왼쪽 → 오른쪽)
+  var sets = {};
+  for (var i = 0; i < n; i++) {
+    [lSlides[i], rSlides[i]].forEach(function (s) {
+      var g = s.dataset.group;
+      var img = s.querySelector("img");
+      (sets[g] = sets[g] || []).push({ src: img.getAttribute("src"), alt: img.getAttribute("alt") });
+      img.dataset.set = g;
+      img.dataset.pos = sets[g].length - 1;
+    });
+  }
+
+  var cur = { set: null, pos: 0 };
+  var lastFocus = null;
+
+  function strip(setName, pos) {
+    vStrip.textContent = "";
+    sets[setName].forEach(function (item, i) {
+      var b = document.createElement("button");
+      b.type = "button";
+      b.className = "viewer__thumb";
+      b.setAttribute("aria-current", i === pos ? "true" : "false");
+      b.setAttribute("aria-label", item.alt);
+      var t = document.createElement("img");
+      t.src = item.src;
+      t.alt = "";
+      b.appendChild(t);
+      b.addEventListener("click", function () { show(setName, i); });
+      vStrip.appendChild(b);
+    });
+  }
+
+  function show(setName, pos) {
+    var list = sets[setName];
+    pos = (pos + list.length) % list.length;
+    cur.set = setName;
+    cur.pos = pos;
+    vImg.src = list[pos].src;
+    vImg.alt = list[pos].alt;
+    vCap.textContent = setName + " " + (pos + 1) + " / " + list.length;
+    strip(setName, pos);
+  }
+
+  function open(setName, pos, trigger) {
+    lastFocus = trigger || null;
+    show(setName, pos);
+    viewer.dataset.open = "true";
+    btnClose.focus();
+  }
+
+  function close() {
+    viewer.dataset.open = "false";
+    vImg.src = "";
+    if (lastFocus) lastFocus.focus();
+  }
+
+  [].slice.call(document.querySelectorAll(".frame__btn")).forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var img = btn.querySelector("img");
+      open(img.dataset.set, Number(img.dataset.pos), btn);
+    });
+  });
+
+  btnPrev.addEventListener("click", function () { show(cur.set, cur.pos - 1); });
+  btnNext.addEventListener("click", function () { show(cur.set, cur.pos + 1); });
+  btnClose.addEventListener("click", close);
+
+  /* ---------- 키보드 (원본에는 없음 · 접근성으로 추가) ---------- */
+  document.addEventListener("keydown", function (e) {
+    if (viewer.dataset.open === "true") {
+      if (e.key === "Escape")     close();
+      if (e.key === "ArrowLeft")  show(cur.set, cur.pos - 1);
+      if (e.key === "ArrowRight") show(cur.set, cur.pos + 1);
+      return;
+    }
+    if (panel !== 0) return;   // 사람·공간에선 각 iframe이 키보드를 처리
+    if (e.key === "ArrowDown" || e.key === "PageDown") { e.preventDefault(); if (Math.round(pos) >= n - 1) { setPanel(1); } else { go(Math.round(pos) + 1); } }
+    if (e.key === "ArrowUp"   || e.key === "PageUp")   { e.preventDefault(); go(Math.round(pos) - 1); }
+    if (e.key === "Home") { e.preventDefault(); go(0); }
+    if (e.key === "End")  { e.preventDefault(); go(n - 1); }
+  });
+
+  apply();
+  cursor();
+
+  // 원본 .initialised — 준비되면 무대를 드러낸다.
+  // rAF 는 탭이 백그라운드면 안 돌아서, 타이머로도 한 번 더 켠다
+  function ready() { stage.dataset.ready = "true"; }
+  requestAnimationFrame(ready);
+  setTimeout(ready, 100);
+})();
+</script>
+
 </body>
 </html>

@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>3장 공간 — 입체 좌우 스크롤 프로토타입</title>
+<style>
+  :root { --card: 58vmin; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; }
+  body {
+    min-height: 100%;
+    position: relative;
+    display: flex; align-items: center;
+    background: #0c0d0e;
+    color: #ececec;
+    font-family: 'Pretendard', system-ui, sans-serif;
+    overflow: hidden;
+  }
+
+  /* 정면 카드 이미지를 화면 전체 배경으로 — 살짝 흐리고 어둡게. 두 겹을 번갈아 교차 페이드 */
+  .s3-bg {
+    position: fixed; inset: 0; z-index: 0;
+    background-size: cover; background-position: center;
+    filter: blur(12px) brightness(.55) saturate(1.05);
+    transform: scale(1.08);
+    opacity: 0;
+    transition: opacity .6s ease;
+    will-change: opacity;
+  }
+  .s3-bg::after { content: ""; position: absolute; inset: 0; background: rgba(8,9,10,.18); }
+
+  /* 좌우 스크롤 무대 — perspective 로 깊이를 준다 */
+  .s3 {
+    position: relative; z-index: 1;
+    width: 100%; height: 100%;
+    display: flex; align-items: center;
+    overflow-x: auto; overflow-y: hidden;
+    perspective: 1500px;
+    scroll-snap-type: none;            /* 스냅 제거 — 작은 휠도 바로 움직이게 */
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .s3::-webkit-scrollbar { display: none; }
+
+  .s3__track {
+    display: flex; align-items: center; gap: 2.2vmin;
+    padding-inline: calc(50% - var(--card) / 2);
+    transform-style: preserve-3d;
+  }
+
+  .s3__card {
+    position: relative;
+    flex: 0 0 var(--card);
+    width: var(--card); height: 74vmin;
+    scroll-snap-align: center;
+    border-radius: 14px; overflow: hidden;
+    background: #222;
+    box-shadow: 0 40px 80px -30px rgba(0,0,0,.85), 0 8px 24px -12px rgba(0,0,0,.6);
+    transform-origin: center center;
+    will-change: transform, opacity;
+    cursor: grab;
+  }
+  .s3__card img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  /* 중앙 상단 제목 */
+  .s3-title {
+    position: fixed; top: 18px; left: 0; right: 0; z-index: 5;
+    text-align: center; color: #fff; pointer-events: none;
+    font-size: 20px; font-weight: 600; letter-spacing: .02em;
+    text-shadow: 0 2px 14px rgba(0,0,0,.6);
+  }
+
+  @media (prefers-reduced-motion: reduce) { .s3-bg { transition: none; } }
+</style>
+</head>
+<body>
+  <div class="s3-bg" id="bgA"></div>
+  <div class="s3-bg" id="bgB"></div>
+
+  <h2 class="s3-title">내가 좋아하는 공간</h2>
+
+  <div class="s3" id="s3">
+    <div class="s3__track">
+      <article class="s3__card"><img src="proto_space/assets/space1_01.jpg" alt="나무 냄새 나는 목공방 1"></article>
+      <article class="s3__card"><img src="proto_space/assets/space1_02.jpg" alt="나무 냄새 나는 목공방 2"></article>
+      <article class="s3__card"><img src="proto_space/assets/space1_03.jpg" alt="나무 냄새 나는 목공방 3"></article>
+      <article class="s3__card"><img src="proto_space/assets/space2_01.jpg" alt="가죽 냄새 나는 공방"></article>
+      <article class="s3__card"><img src="proto_space/assets/space3_01.jpg" alt="햇빛이 드는 공간 1"></article>
+      <article class="s3__card"><img src="proto_space/assets/space3_02.jpg" alt="햇빛이 드는 공간 2"></article>
+      <article class="s3__card"><img src="proto_space/assets/space3_03.jpg" alt="햇빛이 드는 공간 3"></article>
+    </div>
+  </div>
+
+<script>
+(function () {
+  "use strict";
+  var scroller = document.getElementById("s3");
+  var cards = [].slice.call(scroller.querySelectorAll(".s3__card"));
+  var bgs = [document.getElementById("bgA"), document.getElementById("bgB")];
+  var bgCur = 0, bgSrc = null;
+
+  function setBg(src) {
+    if (src === bgSrc) return;
+    bgSrc = src;
+    var next = bgs[1 - bgCur];
+    next.style.backgroundImage = 'url("' + src + '")';
+    next.style.opacity = "1";
+    bgs[bgCur].style.opacity = "0";
+    bgCur = 1 - bgCur;
+  }
+
+  function update() {
+    var sr = scroller.getBoundingClientRect();
+    var mid = sr.left + sr.width / 2;
+    var best = { abs: Infinity, src: null };
+    cards.forEach(function (card) {
+      var r = card.getBoundingClientRect();
+      var c = r.left + r.width / 2;
+      var d = (c - mid) / sr.width;
+      var cl = Math.max(-1.15, Math.min(1.15, d));
+      var ry = cl * -52;
+      var tz = -Math.abs(cl) * 300;
+      var sc = 1 - Math.abs(cl) * 0.16;
+      var op = 1 - Math.abs(cl) * 0.4;
+      card.style.transform = "translateZ(" + tz.toFixed(1) + "px) rotateY(" + ry.toFixed(2) + "deg) scale(" + sc.toFixed(3) + ")";
+      card.style.opacity = Math.max(0.15, op).toFixed(3);
+      card.style.zIndex = String(1000 - Math.round(Math.abs(cl) * 1000));
+      var a = Math.abs(d);
+      if (a < best.abs) { best.abs = a; best.src = card.querySelector("img").getAttribute("src"); }
+    });
+    if (best.src) setBg(best.src);
+  }
+
+  var ticking = false;
+  function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(function () { update(); ticking = false; }); } }
+  scroller.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("resize", update);
+
+  /* 휠: 위로 올리면 왼쪽(scrollLeft 감소), 아래로 내리면 오른쪽(scrollLeft 증가).
+     창 전체를 캡처 단계에서 받아 카드 밖 어디서 굴려도 동작. */
+  function onWheel(e) {
+    var raw = Math.abs(e.deltaY) >= Math.abs(e.deltaX) ? e.deltaY : e.deltaX;
+    if (!raw) return;
+    // 휠 단위 보정: 줄(1)·페이지(2) 단위를 px로. 느린 마우스 휠도 넉넉히 움직이게 ×1.5
+    var unit = e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? window.innerHeight : 1;
+    scroller.scrollLeft += raw * unit * 1.5;   // deltaY>0(아래)→오른쪽 · deltaY<0(위)→왼쪽
+    e.preventDefault();
+    onScroll();
+  }
+  window.addEventListener("wheel", onWheel, { passive: false, capture: true });
+
+  // 마우스로 끌어서 넘기기
+  var down = null;
+  scroller.addEventListener("pointerdown", function (e) {
+    down = { x: e.clientX, left: scroller.scrollLeft }; scroller.setPointerCapture(e.pointerId); scroller.style.scrollSnapType = "none"; scroller.style.cursor = "grabbing";
+  });
+  scroller.addEventListener("pointermove", function (e) { if (down) scroller.scrollLeft = down.left - (e.clientX - down.x); });
+  function endDrag() { if (down) { down = null; scroller.style.scrollSnapType = ""; scroller.style.cursor = ""; } }
+  scroller.addEventListener("pointerup", endDrag);
+  scroller.addEventListener("pointercancel", endDrag);
+
+  window.addEventListener("load", function () {
+    var mid = cards[Math.floor(cards.length / 2)];
+    if (mid) scroller.scrollLeft = mid.offsetLeft - (scroller.clientWidth - mid.offsetWidth) / 2;
+    update();
+  });
+  update();
+})();
+</script>
+</body>
+</html>

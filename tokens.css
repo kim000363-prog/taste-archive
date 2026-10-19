@@ -1,67 +1,87 @@
-/* 카드형 · tokens.css v2.0 (아카이브 전체 시스템)
-   레퍼런스 Jack McEntee (jackentee.com) 홈 · List · Info · 작업 상세 실측값(2026-10-07) → EXTRACTION.md §1.
-   학생은 이 파일을 고치지 않는다. hex 는 이 파일과 my-style.css 에만 있다.
-   색(--ca-paper 등)은 sig.js 가 --my-bg / --my-point 에서 다시 계산해 덮어쓴다. 아래 색은 JS 가 없을 때의 대체값. */
+/* DESIGN.md 토큰 표와 1:1. 값은 여기에만 적는다. */
+/* 출처 레퍼런스: https://annarosa.com (테마 ar-wp/style.css v1.0.0) */
+/* 확인 = 레퍼런스에서 실측 · 내가 정함 = 원본에 없어서 내가 결정 */
+
+/* 서체 실물은 fonts.css 안에 들어 있다 (@font-face). 여기에는 이름만 둔다 */
+
 :root {
-  /* ── 레퍼런스 원색 (body 배경 · --black) ── */
-  --ca-ref-paper: #FFFFFF;   /* body rgb(255,255,255) */
-  --ca-ref-ink: #292929;     /* 글자·선 --black rgb(41,41,41) */
+  /* ---- 색 ---- */
+  --color-bg: #c7d4be;       /* 확인 · 원본 body 배경 */
+  --color-ink: #000000;      /* 확인 · 원본 본문·링크 */
+  --color-accent: #a4af9d;   /* 확인 · 원본 이미지 플레이스홀더 */
+  --color-invert: #ffffff;   /* 확인 · 원본 흰 반전 레이어 (.white-nav) */
 
-  /* ── 색 (sig.js 가 덮어쓴다) ── */
-  --ca-paper: var(--ca-ref-paper);
-  --ca-ink: var(--ca-ref-ink);
-  --ca-point: var(--ca-ref-ink);       /* 원본에 포인트 색 없음 → 기본은 먹 */
-  --ca-on-point: var(--ca-ref-paper);
-  --ca-plane: color-mix(in srgb, var(--ca-ink) 6%, var(--ca-paper));   /* 사진 없는 판 */
+  /* ---- 글자 ---- */
+  /* 원본 GT Sectra Fine은 유료라 못 씀. 라틴 전용 무료 대체 (03_reference.md 서체 표) */
+  --font-body: "Cormorant Garamond", serif;
+  --font-display: "Cormorant Garamond", serif;  /* 확인 · 원본도 서체 1개 */
 
-  /* ── 선 ── */
-  --ca-hair: 1px;            /* .5px solid (1배 화면에서 1px) */
-  --ca-bar: 2px;             /* 진행 막대 · 고른 칸 선 1.25px */
-  --ca-dim: .5;              /* 열리지 않은 카드 캡션 opacity .5 */
+  --size-body: 16px;         /* 확인 · 원본 16px */
+  --size-h3: 18px;           /* 확인 · 원본 캡션 18px */
+  --size-h2: 21px;           /* 확인 · 원본 h2 21px · ≥1681px 캡션 */
+  --size-h1: clamp(30px, 5.5vh, 60px); /* 내가 정함 · 축 라벨. 원본 워드마크 8.1vh 폭에 맞춘 크기 (높이 기준 규칙) */
 
-  /* ── 판 · 격자 ── */
-  --ca-gut: 12px;            /* 화면 가장자리 padding 12px (1280 · 390 같음) */
-  --ca-cols: 12;             /* 12단 격자 — 단 폭 = (100vw − 2×gut − 11×gap) / 12 = 1280에서 93.67px. 원본 4열 = 3단. 390은 4단(style.css) */
-  --ca-gap: 12px;            /* 4열 grid gap 12px */
-  --ca-menu-h: 39px;         /* 하단 고정 메뉴 높이 38.5px */
+  --leading-body: 1.4375;    /* 확인 · 23/16 */
+  --leading-h3: 1.4444;      /* 확인 · 26/18 */
+  --leading-h2: 1.4286;      /* 확인 · 30/21 */
+  --leading-h1: 1;           /* 내가 정함 · 회전 라벨은 행간을 쓰지 않음 */
+  --tracking: normal;        /* 확인 · 원본 letter-spacing 선언 0건 */
 
-  /* ── 그룹핑 간격 (브리프 §I-1) — 장 안 최대 = s2, 장 사이 = s3 ≥ 장 안 최대 × 4 (2026-10-07 regroup) ── */
-  --ca-s1: 12px;             /* 라벨↔내용 (캡션 padding 12px) */
-  --ca-s2: 36px;             /* 장 안 블록 사이 (머리 줄 → 카드 줄 → 큰 문장). 장 안에서 이보다 큰 간격은 쓰지 않는다 */
-  --ca-s3: 160px;            /* 장 사이만 (원 홈 작업 사이 256px → 한글 판면 160). 이전 96 은 장 안 108 보다 작아 장 경계가 사라졌다 */
+  /* ---- 간격 ---- */
+  --space-xs: 10px;          /* 확인 · 원본 썸네일 간격 */
+  --space-s: 20px;           /* 확인 · 원본 내측(센터) 여백 */
+  --space-m: 40px;           /* 확인 · 원본 외측 여백 · 프레임 위아래 인셋 */
+  --space-l: 80px;           /* 확인 · 원본 썸네일 노출 이동거리 */
+  --space-close: 30px;       /* 확인 · 원본 닫기 버튼 오프셋 */
+  --space-nav: 56px;         /* 내가 정함 · 축 라벨 사이 */
 
-  /* ── 장 머리 2단계 — 선·사진과의 거리는 넓게, 같은 묶음 안 글끼리는 좁게 ── */
-  --ca-hd1: 44px;            /* 장 시작 굵은 선 ↔ 장 이름 (390 30) */
-  --ca-hd2: 8px;             /* 장 이름 ↔ 큰 문장 */
+  /* ---- 모양 ---- */
+  --radius: 0;               /* 확인 · 원본 선언 0건 */
+  --hairline: 1px;           /* 내가 정함 · 포커스 표시 · 닫기 선 두께 */
+  --max-width: 480px;        /* 확인 · 원본 .centered */
 
-  /* ── 카드 안 간격 3단계 (2026-10-07 교수 지시) — 사진–글 > 설명–More > 제목–설명 ── */
-  --ca-c1: 36px;             /* 사진 ↔ 제목(글 묶음) — 넓게 (390 26) */
-  --ca-c2: 8px;              /* 제목 ↔ 설명(본 것·해석) — 좁게, 한 묶음 */
-  --ca-c3: 16px;             /* 설명 ↔ More — 중간 */
-  --ca-sub: 14px; --ca-sub-lh: 1.6;   /* 카드 서브카피 — 모든 카드 같은 단계, 2줄 상한 */
-  --ca-gnb-h: 41px;          /* 상단 고정 바 높이 (sig.js 가 실제 높이로 덮어쓴다) */
+  /* ---- 분할 컬럼 (원본 calc 공식 그대로) ---- */
+  --col-frame:  calc(50vw - 60px);                        /* 확인 · .half .container */
+  --col-small:  calc(((50vw - 140px) / 3 * 2) - 20px);    /* 확인 · .small .container */
+  --col-medium: calc(((50vw - 140px) / 3 * 2) + 40px);    /* 확인 · .medium .container */
+  --col-center-small:  calc(((50vw - 140px) / 3 + 140px) / 2 + 10px); /* 확인 */
+  --col-center-medium: calc(((50vw - 140px) / 3 + 80px) / 2 + 10px);  /* 확인 */
+  --col-small-wide:  calc(((50vw - 140px) / 3 * 2) + 40px); /* 확인 · ≤1200px에서 small을 medium 폭으로 */
+  --col-collapse:    calc(50vw - 60px);                     /* 확인 · ≤1023px에서 small·medium 통합 */
 
-  /* ── 글자 (1280 / 390 은 style.css) — 한글 값. 영문 라벨 값은 따로 ── */
-  --ca-h1: 44px;  --ca-h1-lh: 1.25;  --ca-h1-ls: -.02em;   /* 원 Info 문장 51.2/51.2 */
-  --ca-list: 56px; --ca-list-lh: 1.15; --ca-list-ls: -.02em; /* 원 List 76.8/69.12 */
-  --ca-state: 32px; --ca-state-lh: 1.35;                    /* 원 상세 리드 25.6 ~ 문장 51.2 사이 */
-  --ca-d-why: 40px; --ca-d-why-lh: 1.3;                     /* 상세 큰 문장 (원 51.2) */
-  --ca-lead: 22px; --ca-lead-lh: 1.55;                      /* 장 문장 (원 리드 25.6/28.16) */
-  --ca-body: 15px; --ca-body-lh: 1.7;                       /* 본문 (원 12/14.4 → 한글 본문) */
-  --ca-name: 15px; --ca-name-lh: 1.4;                       /* 캡션 이름 (원 12px 대문자 세리프) */
-  --ca-when: 13px; --ca-when-lh: 1.55;                      /* 캡션 둘째 줄 (원 12px 고딕 분류) */
-  --ca-label: 13px;                                         /* 영문 고정 라벨 (원 12/13.2) */
-  --ca-bar-lh: 1.1;  --ca-bar-ls: 0;                        /* 위·아래 고정 바 글자 — 두 바가 같은 값을 쓴다 */
-  --ca-num: 11px;                                           /* [01] (원 10~12px 세리프 숫자) */
-  --ca-small: 12px;
+  --close-size: 60px;        /* 확인 · 원본 닫기 60x60 */
+  --strip-h: 50px;           /* 확인 · 원본 썸네일 스트립 높이 */
 
-  /* ── 움직임 (원 --easing_1 · --easing_2) ── */
-  --ca-e1: cubic-bezier(.3, 0, .2, .9);
-  --ca-e2: cubic-bezier(.45, .22, 0, .95);
-  --ca-t-slide: .85s;        /* project_wrapper left·width */
-  --ca-t-cap: .5s;           /* 캡션 opacity */
-  --ca-t-fade: .35s;         /* 사진 opacity · 화면 바꿈 cross_fade */
-  --ca-t-line: .25s;         /* 메뉴·필터 선 */
-  --ca-t-nudge: .35s;        /* 메뉴 글자 6px 밀림 */
-  --ca-delay: .55s;          /* 사진 등장 지연 .55/.6/.65 */
+  /* ---- 커서 — 원본의 실질적 내비게이션 ----
+     원본은 SVG data-URI 커서 7종 + 흰색 변형을 두고 버튼을 아예 없앤다.
+     화살표 모양은 내가 그렸고(원본 아트는 안 가져옴), 핫스팟과 시스템 폴백은 원본 값 */
+  --cursor-down:   url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='36'%3E%3Cpath d='M18 6 V30 M11 23 L18 30 L25 23' fill='none' stroke='%23000' stroke-width='1'/%3E%3C/svg%3E") 18 33, s-resize;
+  --cursor-up:     url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='36'%3E%3Cpath d='M18 30 V6 M11 13 L18 6 L25 13' fill='none' stroke='%23000' stroke-width='1'/%3E%3C/svg%3E") 18 2, n-resize;
+  --cursor-updown: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='36'%3E%3Cpath d='M18 4 V32 M12 10 L18 4 L24 10 M12 26 L18 32 L24 26' fill='none' stroke='%23000' stroke-width='1'/%3E%3C/svg%3E") 18 18, ns-resize;
+  --cursor-prev:   url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='36'%3E%3Cpath d='M30 18 H6 M13 11 L6 18 L13 25' fill='none' stroke='%23000' stroke-width='1'/%3E%3C/svg%3E") 2 18, w-resize;
+  --cursor-next:   url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='36'%3E%3Cpath d='M6 18 H30 M23 11 L30 18 L23 25' fill='none' stroke='%23000' stroke-width='1'/%3E%3C/svg%3E") 32 18, e-resize;
+
+  --cursor-down-w:   url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='36'%3E%3Cpath d='M18 6 V30 M11 23 L18 30 L25 23' fill='none' stroke='%23fff' stroke-width='1'/%3E%3C/svg%3E") 18 33, s-resize;
+  --cursor-up-w:     url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='36'%3E%3Cpath d='M18 30 V6 M11 13 L18 6 L25 13' fill='none' stroke='%23fff' stroke-width='1'/%3E%3C/svg%3E") 18 2, n-resize;
+  --cursor-updown-w: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='36'%3E%3Cpath d='M18 4 V32 M12 10 L18 4 L24 10 M12 26 L18 32 L24 26' fill='none' stroke='%23fff' stroke-width='1'/%3E%3C/svg%3E") 18 18, ns-resize;
+
+  /* ---- 움직임 ---- */
+  --dur: .25s;                                      /* 확인 · 원본 전역 */
+  --dur-image: .5s;                                 /* 확인 · 원본 이미지 · 분할 이동에도 씀 */
+  --ease: ease-out;                                 /* 확인 */
+  --ease-image: cubic-bezier(.645, .045, .355, 1);  /* 확인 */
+  --opacity-hover: .82;                             /* 내가 정함 · 사진 호버 */
+  --opacity-idle: .45;                              /* 내가 정함 · 지금 보고 있지 않은 축 라벨.
+                                                       원본은 색을 바꾸지 않고 opacity 로만 상태를 만든다 */
+
+  /* ---- 겹침 순서 ---- */
+  --z-mark: 100;             /* 확인 · 원본 워드마크 */
+  --z-lightbox: 101;         /* 확인 · 원본 .single-container */
 }
+
+/* ---- 브레이크포인트 (@media에는 변수를 쓸 수 없어 참고용) ----
+   이 사이트는 데스크톱 전용이다. 모바일 분기를 만들지 않는다.
+   max-width: 1023px  small·medium 폭 통합 · 축 라벨 간격 축소 (원본 규칙)
+   max-width: 1200px  small을 medium 폭으로 승격 (원본 규칙)
+   min-width: 1681px  캡션 한 단 위로 (원본 규칙)
+   -------------------------------------------------------------------------- */

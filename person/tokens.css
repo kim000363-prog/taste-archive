@@ -1,0 +1,83 @@
+/* W05-C 낭독형 — tokens.css
+   레퍼런스 실측값(Money in Check, 2026-09-26, 1280×800·390×844)을 토큰으로 옮긴 파일.
+   레퍼런스는 1728px 설계를 rem = 100vw / 172.8 로 줄여 쓴다(1280에서 1rem = 7.407px).
+   그래서 데스크톱 값은 vw 로, 1080px 이하 값은 레퍼런스 모바일 규칙(clamp)으로 적었다.
+   학생은 이 파일을 고치지 않는다 — my-style.css 만 고친다. */
+:root {
+  /* ── 색 (레퍼런스 실측) ───────────────────── */
+  --c-paper: #E9E9E9;            /* body background rgb(233,233,233) */
+  --c-ink: #000000;              /* 본문 먹 */
+  --c-ink-inverse: #F4F4F1;      /* 짙은 바탕일 때 먹 자리 */
+  --c-dim: #ACACAC;              /* 낭독 전 회색 단어 (JS O0 "#acacac") */
+  --c-claim-dim: #B9B9B9;        /* 가져올 한 가지 줄 기본 회색 */
+  --c-point: #00846A;            /* 제목·날짜·주석 첫 색·N–S 진행선 (--green) */
+  --c-track: #D1D2D2;            /* N–S 진행선 바탕 */
+  --c-caption: #2B2B2B;          /* 폴라로이드 캡션 */
+  --c-grid: rgba(0, 0, 0, .1);   /* 격자선 1px */
+  --c-grid-dark: rgba(255, 255, 255, .12);
+
+  /* ── 격자 (JS 실측: 데스크톱 20rem 주기 · 모바일 25vw) ── */
+  --grid-px: 11.574vw;           /* 148px @1280 */
+  --grid-ox: 9.491vw;            /* 16.4rem = 121px @1280 */
+  --grid-px-mobile: 25vw;        /* 98px @390 */
+  --grid-ox-mobile: 12.5vw;      /* 49px @390 */
+  --grid-line: 1px;
+
+  /* ── 글자 크기 단계 (1280 실측 → vw) ─────────── */
+  --fs-name: 19.676vw;           /* hero__title 251.85px — 이름 상한 */
+  --fs-name-mobile: 19vw;        /* clamp(6rem,19vw,14rem) */
+  --fs-read: 5.556vw;            /* intro__manifesto 71.1px / lh 96.3px */
+  --lh-read: 1.354;
+  --fs-read-mobile: clamp(24px, 7vw, 46px);   /* 27.3px @390 · lh 1.35 */
+  --fs-claim: 7.523vw;           /* claim__line 96.3px / lh 142.2px */
+  --lh-claim: 1.477;
+  --fs-claim-mobile: clamp(36px, 11vw, 90px); /* 42.9px @390 · lh 1.3 */
+  --fs-bio: 2.546vw;             /* author__bio 32.6px / lh 47.3px */
+  --fs-bio-mobile: 21.8px;
+  --fs-title: 2.778vw;           /* book__claim 35.6px weight 200 / lh 39.3px */
+  --fs-title-mobile: 28px;
+  --fs-kicker: 1.852vw;          /* hero__kicker 23.7px weight 200 */
+  --fs-kicker-mobile: 24px;
+  --fs-byline: 1.389vw;          /* hero__byline 17.8px */
+  --fs-byline-mobile: 22px;
+  --fs-cta: 1.797vw;             /* book__cta 23px underline */
+  --fs-ui: 14.8px;               /* header·meta·footer 14.8px @1280 */
+  --fs-ui-mobile: 16px;
+  --fs-label: 12px;              /* author__name 8.9px → 하한 12px 로 올림 */
+  --fs-caption: 10px;            /* author__caption 5.9px → 캡션 하한 10px 로 올림 */
+  --fs-note: 1.852vw;            /* coord 23.7px (손글씨 주석) */
+  --fs-note-mobile: 21px;
+  --fs-compass: 10px;            /* N·S 9.6px → 10px */
+
+  /* ── 굵기 (PP Editorial Old 역할) ────────────── */
+  --w-light: 200;                /* Ultralight — 낭독문·본문 */
+  --w-regular: 400;              /* 제목·가져올 한 가지 */
+  --w-bold: 800;                 /* 머리줄 이름·메타 첫 칸 */
+
+  /* ── 간격 ─────────────────────────────────── */
+  --gutter: 24px;                /* 좌우 여백 3.2rem @1728 설계 = 24px (모바일 실측 24px) */
+  --read-width: 96.1vw;          /* manifesto 1230px @1280 */
+  --bio-width: 60.4vw;           /* author__col 773px @1280 */
+  --section-gap: 11.574vw;       /* 격자 한 칸 */
+  --band-h: 13.3vw;              /* 인물 띠 높이: 인물 약 170px @1280 (strip 947×236 중 인물 키) */
+  --band-max: 74vw;              /* strip__video 947px @1280 */
+  --band-gap: 3.2vw;             /* 인물 간격 약 41px @1280 */
+  --stroke: .1rem;               /* 윤곽선 0.74px @1280 · 1px @390 */
+
+  /* ── 움직임 (레퍼런스 JS 실측) ──────────────── */
+  --read-start: .75;             /* 낭독 시작: 문단 top 이 화면 75% 선 */
+  --read-end: .55;               /* 낭독 끝: 문단 bottom 이 화면 55% 선 */
+  --read-word: 3;                /* 한 단어 차오르는 길이(단어 간격 1 기준) */
+  --claim-start: .80;            /* 가져올 줄 A: top 80% → bottom 50% */
+  --claim-end: .50;
+  --doodle-dim: .32;             /* 문장 속 인물 낭독 전 투명도 */
+  --note-rest: .47;              /* 주석 쉬는 투명도 */
+  --note-pop: 450ms;             /* 주석 튀어나옴 power2.out */
+  --note-settle: 900ms;          /* 포인트색 → 먹 */
+  --note-queue: 140ms;           /* 스크롤로 들어온 주석 간격 */
+  --note-atf-delay: 1300ms;      /* 첫 화면 주석 시작 */
+  --note-atf-step: 220ms;
+  --loader-dur: 1700ms;          /* 로더(작은 격자+인물+주석) — 레퍼런스는 네트워크 따라 1~5초 */
+  --ease-out: cubic-bezier(.22, 1, .36, 1);   /* power3.out 근사 */
+  --object-drift: 3.5;           /* 떠 있는 오브젝트 시차 ±rem (bills Li 2.5~4.5) */
+}
